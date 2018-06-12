@@ -4,6 +4,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class AddComputer {
+	
+	// Identifying web elements
 	@FindBy(id = "name")
 	private WebElement computerName;
 	
@@ -22,6 +24,13 @@ public class AddComputer {
 	@FindBy(css = "input.btn")
 	private WebElement cancel;
 	
+	/**
+	 * Enter the computer details
+	 * @param compName	computer name
+	 * @param intrDate	introduced date
+	 * @param disDate	discontinued date
+	 * @param comp		company
+	 */
 	public void enterComputerDetails(String compName, String intrDate, String disDate, String comp) {
 		computerName.sendKeys(compName);
 		introducedDate.sendKeys(intrDate);
@@ -29,10 +38,16 @@ public class AddComputer {
 		companyDropdown.sendKeys(comp);
 	}
 	
+	/**
+	 * Create computer
+	 */
 	public void createComputer() {
 		createComputer.click();
 	}
 	
+	/**
+	 * Cancel computer creation
+	 */
 	public void cancelCreation() {
 		cancel.click();
 	}

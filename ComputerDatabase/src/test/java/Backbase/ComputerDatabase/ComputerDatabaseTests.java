@@ -3,17 +3,11 @@ package Backbase.ComputerDatabase;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeClass;
-import org.testng.AssertJUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-import org.testng.asserts.Assertion;
+import org.testng.annotations.Parameters;
 import org.testng.asserts.SoftAssert;
 
 
@@ -22,19 +16,22 @@ public class ComputerDatabaseTests {
 	HomePage homePage;
 	EditComputer editComputer;
 	AddComputer addComputer;
-	String totalComputers;
 
 	// Initialize properties and start browser
 	@BeforeClass
 	public void openComputerDatabase() {
 		System.setProperty("webdriver.gecko.driver", "./resources/geckodriver");
+		// Get driver and delete all cookies
 		WebDriver driver = new FirefoxDriver();
 		driver.manage().deleteAllCookies();
 		this.driver = driver;
+		
+		// Initialize page objects
 		homePage = new HomePage();
 		editComputer = new EditComputer();
 		addComputer = new AddComputer();
 		
+		// Initialize page elements
 		driver.get("http://computer-database.herokuapp.com/computers");
 		PageFactory.initElements(driver, homePage);
 		PageFactory.initElements(driver, editComputer);
@@ -49,53 +46,84 @@ public class ComputerDatabaseTests {
 	
 	// Test cases are primarily of CRUD operations
 	
-	@Test (description = "Verify to add a computer", priority = 1)
-	public void addTest() {
+	@Parameters({"computerName", "introducedDate", "company"})
+	@Test (description = "Verify to add a computer in computer database", priority = 1)	
+	public void addTest(String computerName, String introducedDate, String company) {
 		SoftAssert softAssert = new SoftAssert();
+		
+		// Get total computers before adding new computer
 		String availableComputers = homePage.getTotalComputers();
+		
+		// Add computer
 		homePage.clickAddComputer();
-		addComputer.enterComputerDetails("testAutomationComp", "1991-02-20", "", "IBM");
+		addComputer.enterComputerDetails(computerName, introducedDate, "", company);
 		addComputer.createComputer();
-		String updatedComputers = homePage.getTotalComputers();		
+		
+		//Get total computers after adding new computer
+		String updatedComputers = homePage.getTotalComputers();
+		
+		// Assertions (Soft Assertion)
 		softAssert.assertNotEquals(availableComputers, updatedComputers);
-		softAssert.assertEquals("Done! Computer " + "testAutomationComp" + " has been created", homePage.getCreateCompMsg());
+		softAssert.assertEquals("Done! Computer " + computerName + " has been created", homePage.getCreateCompMsg());
 		softAssert.assertAll();
 	}
 	
+	@Parameters({"computerName"})
 	@Test (description = "Verify to filter added computer", priority = 2)
-	public void filterTest() {
-		homePage.filterByName("testAutomationComp");
-		homePage.clickFilteredElement("testAutomationComp");
-		Assert.assertEquals("testAutomationComp", editComputer.getComputerName());
+	public void filterTest(String computerName) {
+		// Apply filter
+		homePage.filterByName(computerName);
+		homePage.clickFilteredElement(computerName);
+		
+		// Assertion (Hard Assertion)
+		Assert.assertEquals(computerName, editComputer.getComputerName());
 		homePage.cancelFilter();
 	}
 	
+	@Parameters({"computerName", "editedComputerName", "editedCompany"})
 	@Test (description = "Verify to edit filtered computer", priority = 3)
-	public void editTest() {
-		homePage.filterByName("testAutomationComp");
-		homePage.clickFilteredElement("testAutomationComp");
-		editComputer.editDetails("testComputer", "", "", "Apple");
+	public void editTest(String computerName, String editedComputerName, String editedCompany) {
+		// Apply filter
+		homePage.filterByName(computerName);		
+		homePage.clickFilteredElement(computerName);
+		
+		// Edit filtered computer and save
+		editComputer.editDetails(editedComputerName, "", "", editedCompany);
 		editComputer.saveComputer();
-		Assert.assertEquals("Done! Computer testComputer has been updated", homePage.getEditComputerMsg());		 
+		
+		// Assertion
+		Assert.assertEquals("Done! Computer " + editedComputerName + " has been updated", homePage.getEditComputerMsg());		 
 	}
 	
-	@Test (description = "Check when search element not available", priority = 4)
-	public void checkNonAvailableItem() {
-		homePage.filterByName("testAutomationComp");
+	@Parameters({"computerName"})
+	@Test (description = "Verify when search element is not available", priority = 4)
+	public void notAvailableItemTest(String computerName) {
+		// Apply filter for an unavailable computer
+		homePage.filterByName(computerName);
+		
+		// Assertion
 		Assert.assertEquals("Nothing to display", homePage.getNotAvailableMsg());
 		homePage.cancelFilter();
 	}
 	
+	@Parameters({"editedComputerName"})
 	@Test (description = "Verify to delete the computer", priority = 5)
-	public void deleteTest() {
+	public void deleteTest(String editedComputerName) {
 		SoftAssert softAssert = new SoftAssert();
+		
+		// Get total computers before deleting
 		String availableComputers = homePage.getTotalComputers();
-		homePage.filterByName("testComputer");
-		homePage.clickFilteredElement("testComputer");
+		
+		// Apply filter and delete computer
+		homePage.filterByName(editedComputerName);
+		homePage.clickFilteredElement(editedComputerName);
 		editComputer.deleteComputer();
-		String updatedComputers = homePage.getTotalComputers();		
+		
+		// Get total computers after deleting
+		String updatedComputers = homePage.getTotalComputers();
+		
+		// Assertions
 		softAssert.assertNotEquals(availableComputers, updatedComputers);
 		softAssert.assertEquals("Done! Computer has been deleted", homePage.getDeleteComputerMsg());
-	}
-	
+	}	
 }

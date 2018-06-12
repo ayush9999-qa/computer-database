@@ -2,40 +2,95 @@
 <testng-results skipped="0" failed="0" ignored="0" total="5" passed="5">
   <reporter-output>
   </reporter-output>
-  <suite name="Suite" duration-ms="13076" started-at="2018-06-12T06:44:22Z" finished-at="2018-06-12T06:44:35Z">
+  <suite name="Suite" duration-ms="13000" started-at="2018-06-12T19:56:32Z" finished-at="2018-06-12T19:56:45Z">
     <groups>
     </groups>
-    <test name="Test" duration-ms="13076" started-at="2018-06-12T06:44:22Z" finished-at="2018-06-12T06:44:35Z">
+    <test name="Backbase Computer Database" duration-ms="13000" started-at="2018-06-12T19:56:32Z" finished-at="2018-06-12T19:56:45Z">
       <class name="Backbase.ComputerDatabase.ComputerDatabaseTests">
-        <test-method status="PASS" signature="openComputerDatabase()[pri:0, instance:Backbase.ComputerDatabase.ComputerDatabaseTests@91161c7]" name="openComputerDatabase" is-config="true" duration-ms="6718" started-at="2018-06-12T06:44:22Z" finished-at="2018-06-12T06:44:29Z">
+        <test-method status="PASS" signature="openComputerDatabase()[pri:0, instance:Backbase.ComputerDatabase.ComputerDatabaseTests@4667ae56]" name="openComputerDatabase" is-config="true" duration-ms="6852" started-at="2018-06-12T19:56:32Z" finished-at="2018-06-12T19:56:39Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openComputerDatabase -->
-        <test-method status="PASS" signature="addTest()[pri:1, instance:Backbase.ComputerDatabase.ComputerDatabaseTests@91161c7]" name="addTest" duration-ms="1326" started-at="2018-06-12T06:44:29Z" description="Verify to add a computer" finished-at="2018-06-12T06:44:30Z">
+        <test-method status="PASS" signature="addTest(java.lang.String, java.lang.String, java.lang.String)[pri:1, instance:Backbase.ComputerDatabase.ComputerDatabaseTests@4667ae56]" name="addTest" duration-ms="1187" started-at="2018-06-12T19:56:39Z" description="Verify to add a computer in computer database" finished-at="2018-06-12T19:56:40Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[testAutomationComp]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1991-02-20]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[IBM]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- addTest -->
-        <test-method status="PASS" signature="filterTest()[pri:2, instance:Backbase.ComputerDatabase.ComputerDatabaseTests@91161c7]" name="filterTest" duration-ms="1277" started-at="2018-06-12T06:44:30Z" description="Verify to filter added computer" finished-at="2018-06-12T06:44:32Z">
+        <test-method status="PASS" signature="filterTest(java.lang.String)[pri:2, instance:Backbase.ComputerDatabase.ComputerDatabaseTests@4667ae56]" name="filterTest" duration-ms="1218" started-at="2018-06-12T19:56:40Z" description="Verify to filter added computer" finished-at="2018-06-12T19:56:41Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[testAutomationComp]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- filterTest -->
-        <test-method status="PASS" signature="editTest()[pri:3, instance:Backbase.ComputerDatabase.ComputerDatabaseTests@91161c7]" name="editTest" duration-ms="1386" started-at="2018-06-12T06:44:32Z" description="Verify to edit filtered computer" finished-at="2018-06-12T06:44:33Z">
+        <test-method status="PASS" signature="editTest(java.lang.String, java.lang.String, java.lang.String)[pri:3, instance:Backbase.ComputerDatabase.ComputerDatabaseTests@4667ae56]" name="editTest" duration-ms="1378" started-at="2018-06-12T19:56:41Z" description="Verify to edit filtered computer" finished-at="2018-06-12T19:56:42Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[testAutomationComp]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[testComputer]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[Apple]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- editTest -->
-        <test-method status="PASS" signature="checkNonAvailableItem()[pri:4, instance:Backbase.ComputerDatabase.ComputerDatabaseTests@91161c7]" name="checkNonAvailableItem" duration-ms="908" started-at="2018-06-12T06:44:33Z" description="Check when search element not available" finished-at="2018-06-12T06:44:34Z">
+        <test-method status="PASS" signature="notAvailableItemTest(java.lang.String)[pri:4, instance:Backbase.ComputerDatabase.ComputerDatabaseTests@4667ae56]" name="notAvailableItemTest" duration-ms="885" started-at="2018-06-12T19:56:42Z" description="Verify when search element is not available" finished-at="2018-06-12T19:56:43Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[testAutomationComp]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- checkNonAvailableItem -->
-        <test-method status="PASS" signature="deleteTest()[pri:5, instance:Backbase.ComputerDatabase.ComputerDatabaseTests@91161c7]" name="deleteTest" duration-ms="1343" started-at="2018-06-12T06:44:34Z" description="Verify to delete the computer" finished-at="2018-06-12T06:44:35Z">
+        </test-method> <!-- notAvailableItemTest -->
+        <test-method status="PASS" signature="deleteTest(java.lang.String)[pri:5, instance:Backbase.ComputerDatabase.ComputerDatabaseTests@4667ae56]" name="deleteTest" duration-ms="1379" started-at="2018-06-12T19:56:43Z" description="Verify to delete the computer" finished-at="2018-06-12T19:56:45Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[testComputer]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- deleteTest -->
-        <test-method status="PASS" signature="closeDriver()[pri:0, instance:Backbase.ComputerDatabase.ComputerDatabaseTests@91161c7]" name="closeDriver" is-config="true" duration-ms="70" started-at="2018-06-12T06:44:35Z" finished-at="2018-06-12T06:44:35Z">
+        <test-method status="PASS" signature="closeDriver()[pri:0, instance:Backbase.ComputerDatabase.ComputerDatabaseTests@4667ae56]" name="closeDriver" is-config="true" duration-ms="40" started-at="2018-06-12T19:56:45Z" finished-at="2018-06-12T19:56:45Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeDriver -->
       </class> <!-- Backbase.ComputerDatabase.ComputerDatabaseTests -->
-    </test> <!-- Test -->
+    </test> <!-- Backbase Computer Database -->
   </suite> <!-- Suite -->
 </testng-results>
